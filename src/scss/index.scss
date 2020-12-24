@@ -1,0 +1,19 @@
+@import "normalize.scss";
+@import "mixins.scss";
+@import "variables.scss";
+@import "header.scss";
+@import "fonts.scss";
+
+body {
+    background-image: url(../background.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+}
+
+* {
+    box-sizing: border-box;
+}
+
