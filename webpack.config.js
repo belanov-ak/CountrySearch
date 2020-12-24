@@ -80,11 +80,30 @@ module.exports = {
           'css-loader',
           'sass-loader'
         ],
-      },
+      },  
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: jsLoaders()
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        use: [
+         {
+            loader: 'file-loader?name=./assets/fonts/webfonts/[name].[ext]'
+          },
+          {
+            loader: 'file-loader?name=./assets/fonts/Roboto/[name].[ext]'
+          }
+        ]
       }
     ]
   }
