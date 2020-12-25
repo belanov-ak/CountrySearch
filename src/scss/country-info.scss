@@ -1,0 +1,11 @@
+.country-info {
+    @include block(90%, 440px, $tertiary-color, 0.5);
+
+    &__header {
+        @include header($prime-color)
+    }
+
+    &__output {
+        @include block(93%, 345px, $prime-color, 0.2)
+    }
+}

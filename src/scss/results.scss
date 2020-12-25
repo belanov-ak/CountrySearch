@@ -1,0 +1,14 @@
+.results {
+    position: absolute;
+    z-index: 2;
+    left: 5%;
+    @include block(90%, 310px, $prime-color, 0.6);
+
+    &__header {
+        @include header($secondary-color)
+    }
+
+    &__output {
+        @include block(93%, 233px, $prime-color,0.8)
+    }
+}

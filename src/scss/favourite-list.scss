@@ -1,0 +1,12 @@
+.favourite-list {
+    @include block(90%, 180px, $prime-color, 0.8);
+
+    &__header {
+        @include header($secondary-color);
+        margin-top: 5px;
+    }
+
+    &__output {
+        @include block(93%, 110px, $prime-color, 1)
+    }
+}
