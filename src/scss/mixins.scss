@@ -2,3 +2,18 @@
     font-family: 'Spectral', serif;
     font-size: $size;
 }
+
+@mixin header($color) {
+    margin: 10px;
+    padding: 10px 0px 0px 35px;
+    color: $color;
+    opacity: 1;
+    font-family: $prime-font;
+}
+
+@mixin block($width, $height, $color, $opacity) {
+    width: $width;
+    height: $height;
+    margin: 0 auto;
+    background: rgba($color, $opacity);
+}

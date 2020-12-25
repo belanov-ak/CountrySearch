@@ -2,7 +2,9 @@
 @import "mixins.scss";
 @import "variables.scss";
 @import "header.scss";
-@import "fonts.scss";
+@import "results.scss";
+@import "country-info.scss";
+@import "favourite-list.scss";
 
 body {
     background-image: url(../background.jpg);
