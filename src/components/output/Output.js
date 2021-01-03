@@ -1,12 +1,20 @@
 import { BasicComponent } from "../../core/BasicComponent";
+import { countriesOutput } from "./countriesOutput";
 
 export class Output extends BasicComponent {
     static className = 'country-info'
+    constructor($root) {
+        super($root, {
+            name: 'Output',
+            listeners: ['click']
+        })
+    }
 
     toHTML() {
-        return `
-                <h2 class="country-info__header">Your country is:</h2>
-                <div class="country-info__output"></div>
-        `
+        return countriesOutput()
+    }
+
+    onClick(event) {
+        console.log(event.target)
     }
 }
