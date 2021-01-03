@@ -5,7 +5,7 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Coutry Search</title>
+  <title>Country Search</title>
 </head>
 <body>
 
@@ -21,13 +21,44 @@
 
   <div class="country-info">
     <h2 class="country-info__header">Your country is:</h2>
-    <div class="country-info__output"></div>
-  </div>
+    <div class="country-info__output">
 
+      <div class="country-card-header">
+          <h3 class="country-card-header__name">Country Name</h3>
+          <button class="country-card-header__like-button">Add to favourites</button>
+      </div>
+      
+      <div class="country-card-body">
+
+          <div class="country-card-body__flag">IMG</div>
+
+          <div class="country-card-body__info">
+
+              <div class="info-code">
+                <h4 class="info-code__header">Code of the counrty:</h4>
+                <div class="info-code__body">Code</div>
+              </div>
+
+              <div class="info-language">
+                <h4 class="info-language__header">Languages of the country:</h4>
+                <div class="info-language__body">Language</div>
+              </div>
+
+              <div class="info-bordering-countries">
+                <h4 class="info-bordering-countries__header">This country bordering with:</h4>
+                <div class="info-bordering-countries__body">Countries</div>
+              </div>
+
+          </div>
+      </div>
+          
+    </div>
+  </div>
+  
   <div class="favourite-list">
     <h2 class="favourite-list__header">Favourite countries:</h2>
     <div class="favourite-list__output"></div>
   </div>
-
+  
 </body>
 </html>

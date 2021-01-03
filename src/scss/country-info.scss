@@ -9,3 +9,30 @@
         @include block(93%, 345px, $prime-color, 0.2)
     }
 }
+
+.country-card-header{
+    display: flex;
+    justify-content: space-between;
+    @include block(100%, 40px, $prime-color, 1);
+
+    &__name {
+        color: $secondary-color;
+        margin: auto;
+    }
+}
+
+.country-card-body {
+    display: flex;
+    justify-content: space-between;
+
+    &__flag {
+        width: 25%;
+        height: 25%;
+    }
+
+    &__info {
+        width: 75%;
+        height: 100%;
+        margin-right:auto;
+    }
+}
