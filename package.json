@@ -20,6 +20,7 @@
   "homepage": "https://github.com/belanov-ak/CountrySearch#readme",
   "devDependencies": {
     "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.8.4",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.6",
