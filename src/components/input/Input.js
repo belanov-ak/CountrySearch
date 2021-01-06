@@ -3,10 +3,11 @@ import { BasicComponent } from "../../core/BasicComponent";
 export class Input extends BasicComponent {
     static className = 'input-block'
 
-    constructor($root) {
+    constructor($root, options) {
         super($root, {
             name: 'Input',
-            listeners: ['input']
+            listeners: ['input'],
+            ...options
         })
     }
 
@@ -18,6 +19,6 @@ export class Input extends BasicComponent {
     }
 
     onInput(event) {
-        return event.target.value
+        const value = event.target.value
     }
 }
