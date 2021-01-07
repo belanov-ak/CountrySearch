@@ -1,4 +1,4 @@
-import { BasicComponent } from "../../core/BasicComponent";
+import { BasicComponent } from "@/core/BasicComponent";
 
 export class Input extends BasicComponent {
     static className = 'input-block'
@@ -6,7 +6,7 @@ export class Input extends BasicComponent {
     constructor($root, options) {
         super($root, {
             name: 'Input',
-            listeners: ['input'],
+            listeners: ['keydown'],
             ...options
         })
     }
@@ -18,7 +18,18 @@ export class Input extends BasicComponent {
         `
     }
 
-    onInput(event) {
-        const value = event.target.value
+    init() {
+        super.init()
+    }
+
+    onKeydown(event) {
+        const keys = ['Enter']
+
+        const {key} = event
+
+        if (keys.includes(key)) {
+            const value = event.target.value
+            this.emitter.emit('toFetch', value)
+        }
     }
 }

@@ -5,6 +5,26 @@ class Dom {
         : selector
     }
 
+    find(selector) {
+        return $(this.$el.querySelector(selector))
+    }
+
+    text(text) {
+        if (typeof text === 'string') {
+            this.$el.textContent = this.$el.textContent + ' ' + text
+            return this
+        }
+        return this.$el.textContent.trim()
+    }
+
+    clear() {
+        this.$el.textContent = ''
+    }
+
+    img(img) {
+        this.$el.src = img
+    }
+
     on(eventType, callback) {
         this.$el.addEventListener(eventType, callback)
     }
