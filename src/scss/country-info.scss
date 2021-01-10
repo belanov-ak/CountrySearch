@@ -1,12 +1,69 @@
 .country-info {
-    @include block(90%, 440px, $tertiary-color, 0.5);
+    @include block(90%, 465px, $tertiary-color, 0.5);
+
 
     &__header {
-        @include header($prime-color)
+        @include header($prime-color);
+        margin-top: 0;
     }
 
     &__output {
-        @include block(93%, 345px, $prime-color, 0.2)
+        @include block(93%, 395px, $prime-color, 0.2)
+    }
+}
+
+.country-card-header{
+    display: flex;
+    justify-content: space-between;
+    @include block(100%, 40px, $prime-color, 1);
+
+    &__name {
+        color: $secondary-color;
+        margin: auto;
+    }
+}
+
+.country-card-body {
+    display: flex;
+    justify-content: space-between;
+
+    &__flag {
+        width: 35%;
+        height: 25%;
+        padding-top: 10px;
+        padding-left: 10px;
+    }
+
+    &__info {
+        width: 65%;
+        height: 100%;
+        margin-right:auto;
+        margin-left: 5px;
+
+        .info-code__body {
+            @include info;
+        }
+
+        .info-language__body {
+            @include info;
+        }
+    }
+
+    .info-bordering-countries__body {
+        @include info;
+    }
+}
+
+.bordering-country-wraper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    padding-right: 5px;
+
+    .bordering-country {
+        @include info;
+        cursor: pointer;
+        opacity: 1 !important;
     }
 }
 

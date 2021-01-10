@@ -12,3 +12,12 @@
     margin: 0 auto;
     background: rgba($color, $opacity);
 }
+
+@mixin info() {
+    margin-left: 0 auto;
+    max-width: 100px;
+    background: rgba(0,0,0,0.8);
+    color:$secondary-color;
+    padding: 5px;
+    text-align: center;
+}
