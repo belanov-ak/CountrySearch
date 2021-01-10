@@ -25,7 +25,9 @@ export class Input extends BasicComponent {
 
         if (keys.includes(key)) {
             const value = event.target.value
-            this.emitter.emit('toFetch', value)
+            if (value !== '' && value !== ' ') {
+                this.emitter.emit('toFetch', value)
+            }
         }
     }
 }

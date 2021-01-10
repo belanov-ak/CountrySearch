@@ -26,7 +26,8 @@ export class Results extends BasicComponent{
 
         this.emitter.subscribe('toFetch', value => {getAPIResponse(value)
             .then((data) => {
-                if (!data.singleCounrty) {
+                console.log(data)
+                if (!data.singleCounrty && data[0]) {
                     displayCountriesList(data)
                 }
                 return data
