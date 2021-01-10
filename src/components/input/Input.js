@@ -18,10 +18,6 @@ export class Input extends BasicComponent {
         `
     }
 
-    init() {
-        super.init()
-    }
-
     onKeydown(event) {
         const keys = ['Enter']
 

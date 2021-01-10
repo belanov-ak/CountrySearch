@@ -26,7 +26,10 @@ export function countriesOutput() {
 
                 <div class="info-bordering-countries">
                     <h4 class="info-bordering-countries__header">This country bordering with:</h4>
-                    <div class="info-bordering-countries__body" data-field="bordering-countries">Countries</div>
+                    <div class="bordering-country-wraper" data-field="bordering-countries">
+                        <div class="info-bordering-countries__body" data-field="countries-placeholder">Countries
+                        </div>
+                    </div>
                 </div>
 
             </div>

@@ -9,7 +9,7 @@ export async function getAPIResponse(userRequest) {
         return result
     }
 
-    async function parseResult() {
+    async function checkAndParseResult() {
         const countriesList = await getSuitsCountriesList(userRequest)
 
         var countryInfo = []
@@ -27,6 +27,28 @@ export async function getAPIResponse(userRequest) {
 
         return countryInfo
     }
+    const arr = await checkAndParseResult()
+    return arr
+}
+
+export async function getResponseByCode(code) {
+
+    async function getCountriesListByCode(string) {
+        const requestURL = 'https://restcountries.eu/rest/v2/all'
+
+        const response = await fetch(requestURL)
+        const data = await response.json()
+        const result = data.filter(country => country.alpha3Code.match(string))
+        
+        return result
+    }
+
+    async function parseResult() {
+        const country = await getCountriesListByCode(code)
+        const countryInfo = country[0]
+        return countryInfo
+    }
+
     const arr = await parseResult()
     return arr
 }

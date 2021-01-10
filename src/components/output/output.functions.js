@@ -1,6 +1,20 @@
 import { $ } from '@core/dom'
 const params = ['name', 'flag', 'alpha3Code', 'languages', 'borders']
 
+function createBorderingCountryWrap() {`
+    return <div class="bordering-country" data-type="bordering-country-button"></div>
+`}
+
+export function createVoidArray() {
+    const arr = new Array(params.length)
+        .fill('No Data')
+
+    arr[0] = `Can't found this country`
+
+    return arr
+}
+
+//return array of necessary parameters
 export function parseData(data) {
     const parsedArr = []
 
@@ -10,9 +24,6 @@ export function parseData(data) {
 
     return parsedArr
 }
-
-
-
 
 export function displayCountryInfo(arr) {
 
@@ -32,27 +43,57 @@ export function displayCountryInfo(arr) {
 
     //Loops through and displays all information about the country
     function layoutCountryInfo(checkedArr) {
-        const substring = 'https://'
 
         for (var i = 0; i<checkedArr.length; i++) {
-
+            //checking for image
+            const url = arr[i].includes('https://')
+                ? url = arr[i]
+                : url = 'No Data'
             checkedArr[i].clear()
 
-            if (arr[i].includes(substring)) {
-                console.log(checkedArr[i])
-                checkedArr[i].img(arr[i])
+            checkedArr[i].img(url)
+
+            if(arr[i] === 'No Data') {
+                checkedArr[i].css({
+                    opacity: 0
+                })
+            }
+            //checking for suitable strings
+            else if (typeof arr[i] === 'string') {
                 
-            } else if (typeof arr[i] === 'string') {
+                checkedArr[i].css({
+                    opacity: 1
+                })
+
                 checkedArr[i].text(arr[i])
 
+            //searching and parse nested parameters
             } else if (typeof arr[i] === 'object') {
+
                 for (var j = 0; j < arr[i].length; j++) {
+                    
 
                     if (typeof arr[i][j] === 'string') {
-                        console.log(arr[i][j])
-                        checkedArr[i].text(arr[i][j])
+
+                        checkedArr[i].css({
+                            opacity: 1
+                        })
+
+                        const $el = $root.find('[data-field="bordering-countries"]')
+                        function createDiv(content) {
+                            return `
+                                <div class="bordering-country" data-type="border-country">${content}</div>
+                            `
+                        }
+
+                        $el.html(createDiv(arr[i][j]))
 
                     } else if (typeof arr[i][j] === 'object'){
+
+                        checkedArr[i].css({
+                            opacity: 1
+                        })
+
                         checkedArr[i].text(arr[i][j].name)
                     }
                 }

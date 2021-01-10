@@ -1,7 +1,8 @@
 import { BasicComponent } from "@core/BasicComponent";
 import {countriesOutput } from "./countriesOutput";
-import { getAPIResponse } from "./fetch";
-import { parseData, displayCountryInfo } from "./output.functions";
+import { $ } from '@core/dom'
+import { getAPIResponse, getResponseByCode } from "@core/fetch";
+import { parseData, displayCountryInfo, createVoidArray } from "./output.functions";
 
 export class Output extends BasicComponent {
     static className = 'country-info'
@@ -20,19 +21,32 @@ export class Output extends BasicComponent {
     init() {
         super.init()
 
-        
-        this.emitter.subscribe('toFetch', value => {getAPIResponse(value)
+        this.emitter.subscribe('toFetch', value => {
+            getAPIResponse(value)
             .then((data) => {
+                var arr
                 if (data.singleCounrty) {
-                    var arr = parseData(data)
+                    
+                    arr = parseData(data)
+                } else {
+                    arr = createVoidArray()
                 }
                 return arr
-            }).then((parsedArr) => displayCountryInfo(parsedArr))
+            }).then(parsedArr => displayCountryInfo(parsedArr))
         })
-        
+
+        this.emitter.subscribe('codeRequest', value => {
+            getResponseByCode(value)
+            .then(data => parseData(data))
+            .then(parsedArr => displayCountryInfo(parsedArr))
+        })
     }
 
     onClick(event) {
-        console.log(event.target)
+        if( $(event.target).data.type === 'border-country') {
+            const $country = $(event.target)
+
+            this.emitter.emit('codeRequest', $country.text())
+        }
     }
 }

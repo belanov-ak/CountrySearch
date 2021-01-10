@@ -11,7 +11,7 @@ class Dom {
 
     text(text) {
         if (typeof text === 'string') {
-            this.$el.textContent = this.$el.textContent + ' ' + text
+            this.$el.textContent = text
             return this
         }
         return this.$el.textContent.trim()
@@ -21,8 +21,8 @@ class Dom {
         this.$el.textContent = ''
     }
 
-    img(img) {
-        this.$el.src = img
+    img(url) {
+        this.$el.src = url
     }
 
     on(eventType, callback) {
@@ -35,10 +35,51 @@ class Dom {
 
     html(html) {
         if(typeof html === 'string') {
-            this.$el.innerHTML = html
+            this.$el.innerHTML = this.$el.innerHTML + html
             return this
         }
         return this.$el.outerHTML.trim()
+    }
+
+    clearHTML() {
+        this.$el.innerHTML = ''
+    }
+
+    get data() {
+        return this.$el.dataset
+    }
+
+    get outerText() {
+        return this.$el.outerText
+    }
+
+    closest(selector) {
+        return $(this.$el.closest(selector))
+    }
+
+    getCoords() {
+        return this.$el.getBoundingClientRect()
+    }
+
+    getLastElementChildCoords() {
+        return this.$el.lastElementChild.getBoundingClientRect()
+    }
+
+    addClass(className) {
+        this.$el.classList.add(className)
+        return this
+    }
+
+    removeClass(className) {
+        this.$el.classList.remove(className)
+        return this
+    }
+
+    css(styles = {}) {
+        Object.keys(styles)
+        .forEach(key => {
+          this.$el.style[key] = styles[key]
+        })
     }
 
     append(node) {
@@ -60,8 +101,8 @@ export function $(selector) {
     return new Dom(selector)
 }
 
-$.create = (tafName, classes = '') => {
-    const el = document.createElement(tafName)
+$.create = (tagName, classes = '') => {
+    const el = document.createElement(tagName)
     if (classes) {
         el.classList.add(classes)
     }
