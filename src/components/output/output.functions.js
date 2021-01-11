@@ -1,6 +1,19 @@
 import { $ } from '@core/dom'
 const params = ['name', 'flag', 'alpha3Code', 'languages', 'borders']
 
+export function resizeOutput($root, width, margin) {
+    $root.css({
+        width: width,
+        margin: margin
+    })
+}
+
+export function shouldRemoveFavButton(arr) {
+    if (arr[0].text()) {
+        console.log(arr[0].text())
+    }
+}
+
 function createBorderingCountryWrap() {`
     return <div class="bordering-country" data-type="bordering-country-button"></div>
 `}
@@ -25,10 +38,17 @@ export function parseData(data) {
     return parsedArr
 }
 
-export function displayCountryInfo(arr) {
-
-    const $root = $(document.querySelector('[data-field="country-card"]'))
-
+export function displayCountryInfo(parsedArr, arrOfFavourites = [], $root) {
+    const $button = $root.find('[data-type="favourites-button"]')
+    $button.css({
+        display: 'block'
+    })
+    if (arrOfFavourites.find(el => el === parsedArr[0])) {
+        $button.css({
+            display: 'none'
+        })
+    }
+    
     //create array of DOM elements, and connect it with layout
     function createCardFields() {
         const fieldsNames = ['name','img','code','language','bordering-countries']
@@ -46,34 +66,34 @@ export function displayCountryInfo(arr) {
 
         for (var i = 0; i<checkedArr.length; i++) {
             //checking for image
-            const url = arr[i].includes('https://')
-                ? url = arr[i]
+            const url = parsedArr[i].includes('https://')
+                ? url = parsedArr[i]
                 : url = 'No Data'
             checkedArr[i].clear()
 
             checkedArr[i].img(url)
 
-            if(arr[i] === 'No Data') {
+            if(parsedArr[i] === 'No Data') {
                 checkedArr[i].css({
                     opacity: 0
                 })
             }
             //checking for suitable strings
-            else if (typeof arr[i] === 'string') {
+            else if (typeof parsedArr[i] === 'string') {
                 
                 checkedArr[i].css({
                     opacity: 1
                 })
 
-                checkedArr[i].text(arr[i])
+                checkedArr[i].text(parsedArr[i])
 
             //searching and parse nested parameters
-            } else if (typeof arr[i] === 'object') {
+            } else if (typeof parsedArr[i] === 'object') {
 
-                for (var j = 0; j < arr[i].length; j++) {
+                for (var j = 0; j < parsedArr[i].length; j++) {
                     
 
-                    if (typeof arr[i][j] === 'string') {
+                    if (typeof parsedArr[i][j] === 'string') {
 
                         checkedArr[i].css({
                             opacity: 1
@@ -86,15 +106,15 @@ export function displayCountryInfo(arr) {
                             `
                         }
 
-                        $el.html(createDiv(arr[i][j]))
+                        $el.html(createDiv(parsedArr[i][j]))
 
-                    } else if (typeof arr[i][j] === 'object'){
+                    } else if (typeof parsedArr[i][j] === 'object'){
 
                         checkedArr[i].css({
                             opacity: 1
                         })
 
-                        checkedArr[i].text(arr[i][j].name)
+                        checkedArr[i].text(parsedArr[i][j].name)
                     }
                 }
             }
