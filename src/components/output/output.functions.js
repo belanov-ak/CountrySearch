@@ -1,6 +1,13 @@
 import { $ } from '@core/dom'
 const params = ['name', 'flag', 'alpha3Code', 'languages', 'borders']
 
+export function resizeOutput($root, width, margin) {
+    $root.css({
+        width: width,
+        margin: margin
+    })
+}
+
 function createBorderingCountryWrap() {`
     return <div class="bordering-country" data-type="bordering-country-button"></div>
 `}

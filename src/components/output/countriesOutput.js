@@ -5,7 +5,7 @@ export function countriesOutput() {
 
         <div class="country-card-header">
             <h3 class="country-card-header__name" data-field="name">Country name</h3>
-            <button class="country-card-header__like-button">Add to favourites</button>
+            <button class="country-card-header__like-button" data-type="favourites-button">Add to favourites</button>
         </div>
         
         <div class="country-card-body">

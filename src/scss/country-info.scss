@@ -1,7 +1,6 @@
 .country-info {
     @include block(90%, 465px, $tertiary-color, 0.5);
 
-
     &__header {
         @include header($prime-color);
         margin-top: 0;

@@ -1,0 +1,49 @@
+.favourites-list {
+    position: absolute;
+    @include block(25%, 180px, $prime-color, 0.8);
+    left: 75%;
+    padding-left: 10px;
+    display: none;
+
+    &__header {
+        font-size: 20px;
+        color: $secondary-color;
+        opacity: 1;
+        font-family: $prime-font;
+    }
+
+    &__output {
+        @include block(93%, 90%, $tertiary-color, 0.8)
+    }
+
+    &__wrap {
+        padding-top: 5px;
+        margin: 5px;
+    }
+
+    &__item {
+        display: flex;
+        justify-content: flex-start;
+        background-color: $secondary-color;
+        border: 2px solid $prime-color;
+        border-left-color: rgb(118, 118, 118);
+        border-top-color: rgb(118, 118, 118);
+        border-bottom: none;
+    }
+
+    &__item-id {
+        padding: 5px;
+        border-right: 2px solid rgb(118, 118, 118);
+    }
+
+    &__item-name {
+        margin: auto;
+        text-align: center;
+    }
+
+    &__remove-button {
+        border-radius: 0;
+        width: 100%;
+        cursor: pointer;
+    }
+}
