@@ -3,7 +3,7 @@ import {countriesOutput } from "./countriesOutput";
 import { $ } from '@core/dom';
 import { getAPIResponse, getResponseByCode } from "@core/fetch";
 import { checkThisString} from "@core/utils"
-import { parseData, displayCountryInfo, createVoidArray, resizeOutput } from "./output.functions";
+import { parseData, displayCountryInfo, createVoidArray, resizeOutput, shouldRemoveFavButton } from "./output.functions";
 
 export class Output extends BasicComponent {
     static className = 'country-info'
@@ -13,6 +13,9 @@ export class Output extends BasicComponent {
             listeners: ['click'],
             ...options
         })
+
+        this.disableButtonList = []
+        this.countriesList = []
     }
 
     toHTML() {
@@ -34,14 +37,14 @@ export class Output extends BasicComponent {
                 }
                 return arr
             }).then(parsedArr => {
-                displayCountryInfo(parsedArr)
-            }).then(parsedArr => console.log(parsedArr))
+                displayCountryInfo(parsedArr, this.disableButtonList, this.$root)
+            })
         })
 
         this.emitter.subscribe('codeRequest', value => {
             getResponseByCode(value)
             .then(data => parseData(data))
-            .then(parsedArr => displayCountryInfo(parsedArr))
+            .then(parsedArr => displayCountryInfo(parsedArr, this.disableButtonList, this.$root))
         })
 
         this.emitter.subscribe('addToFavourites', string => {
@@ -51,6 +54,7 @@ export class Output extends BasicComponent {
         })
 
         this.emitter.subscribe('updateFavourites', arr => {
+            this.disableButtonList = arr
             if (arr.length == 0) {
                 resizeOutput(this.$root, '90%', '0 auto')
             }
@@ -65,9 +69,24 @@ export class Output extends BasicComponent {
         }
 
         if( $(event.target).data.type === 'favourites-button') {
+            const $button = $(event.target)
+            $button.css({
+                display: 'none'
+            }) 
+            const firstPH = 'Country name'
+            const secondPH = `Can't found this country`
             const countryName = this.$root.find('[data-field="name"]')
-            
-            this.emitter.emit('addToFavourites', countryName.text())
+            var text = countryName.text()
+
+            this.emitter.emit('addToFavourites', text)
+
+            if (text !== firstPH && text !== secondPH) {
+                if(checkThisString(text, this.disableButtonList)) {
+                    this.disableButtonList.push(text)
+                    this.emitter.emit('toFetch', text)
+                    this.emitter.emit('updateFavourites', this.disableButtonList)
+                }
+            }
         }
     }
 }

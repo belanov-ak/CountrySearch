@@ -6,7 +6,7 @@ export function capitalize (string) {
 }
 
 export function checkThisString(str, arr = []) {
-    const placeHolders = ['Country name', `Can't found this country`]
+    const placeHolders = ['Country name', `Can't found this country`, '']
 
     if (placeHolders.find(el => el === str)) {
         return false 

@@ -29,7 +29,7 @@ export class Favourites extends BasicComponent{
         this.emitter.subscribe('addToFavourites', string => {
             if (checkThisString(string, this.countriesList)) {
                 this.countriesList.push(string)
-
+                this.emitter.emit('updateDisableList', this.countriesList)
                 displayFavList(this.countriesList, this.$root)
             }
         })
@@ -46,12 +46,16 @@ export class Favourites extends BasicComponent{
     }
 
     onClick(event) {
-        if ($(event.target).data.type='favourites-remove') {
+        if ($(event.target).data.type === 'favourites-remove') {
             const index = $(event.target).data.index
             const $item = this.$root.find(`[data-type="favourites-name${index}"]`)
-            const countryName = $item.text()
-            this.countriesList = this.countriesList.filter(el => el !== countryName)
-            this.emitter.emit('updateFavourites', this.countriesList)
+            if ($item !== null) {
+                const countryName = $item.text()
+                this.countriesList = this.countriesList.filter(el => el !== countryName)
+                this.emitter.emit('toFetch', countryName)
+                this.emitter.emit('updateFavourites', this.countriesList)
+                
+            }
         }
     }
 }
